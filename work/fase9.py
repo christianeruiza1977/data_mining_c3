@@ -75,7 +75,8 @@ if HF_OK:
     emo_muestra = muestra_temas['sentiment']
     n_bert = int((info_bert['Topic'] != -1).sum())
     pct_sin_tema = float((temas_bert == -1).mean() * 100)
-    pct_lda_sin_tema = 0.0   # LDA asigna siempre un tema dominante a cada tweet
+    # LDA solo asigna tema a los tweets con palabras útiles tras quitar stopwords; los demás quedan sin tema
+    pct_lda_sin_tema = round(100 * (1 - len(tema_dom) / len(muestra_temas)), 1)
     claves_bert = {int(t): [w for w, _ in bert.get_topic(int(t))[:8]] for t in info_bert['Topic'] if t != -1}
 
     def pureza(temas, emociones):
@@ -86,7 +87,7 @@ if HF_OK:
     tema_bert_s = pd.Series(temas_bert, index=muestra_temas.index)
     con_tema = tema_bert_s != -1
     pureza_bert, cruce_bert = pureza(tema_bert_s[con_tema].values, emo_muestra[con_tema])
-    pureza_lda, cruce_lda = pureza(tema_dom.loc[muestra_temas.index].values, emo_muestra)
+    pureza_lda, cruce_lda = pureza(tema_dom.values, muestra_temas.loc[tema_dom.index, 'sentiment'])
     base_emocion = float(emo_muestra.value_counts(normalize=True).iloc[0])
     comparacion = pd.DataFrame({'LDA': [K_LDA, pct_lda_sin_tema, round(pureza_lda, 3)],
                                 'BERTopic': [n_bert, round(pct_sin_tema, 1), round(pureza_bert, 3)]},
@@ -102,7 +103,7 @@ if HF_OK:
     print("\nCruce BERTopic (tema x emoción, conteos):")
     print(cruce_bert.to_string())
     res9['bertopic'] = {'ejecutado': True, 'n_temas_bertopic': n_bert, 'n_temas_lda': int(K_LDA),
-                        'pct_sin_tema_bertopic': round(pct_sin_tema, 2), 'pct_sin_tema_lda': 0.0,
+                        'pct_sin_tema_bertopic': round(pct_sin_tema, 2), 'pct_sin_tema_lda': pct_lda_sin_tema,
                         'pureza_bertopic': round(pureza_bert, 4), 'pureza_lda': round(pureza_lda, 4),
                         'palabras_bertopic': {str(k): v for k, v in claves_bert.items()}, 'tiempo_s': round(t_bert, 1)}
 else:

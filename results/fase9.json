@@ -1,19 +1,32 @@
 {
-  "hf_ok": false,
-  "llm_ok": false,
+  "hf_ok": true,
+  "llm_ok": true,
   "bertopic": {
     "ejecutado": false
   },
   "llm_zero_shot": {
-    "ejecutado": false
+    "ejecutado": true,
+    "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+    "f1_macro_llm": 0.0295,
+    "f1_macro_mejor_modelo_mismos_100": 0.1763,
+    "s_por_tweet_llm": 0.55,
+    "ms_por_tweet_mejor_modelo": 0.084,
+    "pct_fuera_de_lista": 87.0
   },
   "embeddings": {
-    "ejecutado": false
+    "ejecutado": true,
+    "f1_macro_embeddings": 0.1594,
+    "f1_macro_tfidf_mejor": 0.1976,
+    "accuracy_embeddings": 0.3564,
+    "C": 1.0,
+    "n_train_usado": 27781,
+    "tiempo_codificar_s": 98.5,
+    "tiempo_entrenar_s": 50.86
   },
   "costo_1000_tweets": {
     "tokens_entrada_aprox": 68998,
     "caracteres_prompt_medio": 276.0,
-    "tiempo_prediccion_mejor_modelo_s": 0.0397
+    "tiempo_prediccion_mejor_modelo_s": 0.0288
   },
   "drift": {
     "psi_predicciones": 0.3502,
@@ -58,12 +71,12 @@
     }
   },
   "parquet": {
-    "resultados_csv_mb": 0.000293,
-    "resultados_parquet_mb": 0.00361,
+    "resultados_csv_mb": 0.000431,
+    "resultados_parquet_mb": 0.003839,
     "corpus_csv_mb": 3.391162,
     "corpus_parquet_snappy_mb": 2.246883,
-    "razon_resultados": 0.081,
+    "razon_resultados": 0.112,
     "razon_corpus": 1.509,
-    "filas_resultados": 4
+    "filas_resultados": 6
   }
 }
