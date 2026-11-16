@@ -1,0 +1,114 @@
+{
+  "filas_crudas": 40000,
+  "filas_limpias": 39688,
+  "dup_tweet_id": 0,
+  "dup_texto": 173,
+  "textos_contradictorios": 62,
+  "filas_contradictorias": 207,
+  "dup_exactos_tras_conflicto": 28,
+  "vacios_tras_limpiar": 77,
+  "longitud_caracteres": {
+    "media": 73.4,
+    "mediana": 69.0,
+    "min": 1.0,
+    "max": 167.0
+  },
+  "longitud_palabras": {
+    "media": 13.2,
+    "mediana": 12.0,
+    "min": 1.0,
+    "max": 34.0
+  },
+  "distribucion_cruda": {
+    "neutral": 8638,
+    "worry": 8459,
+    "happiness": 5209,
+    "sadness": 5165,
+    "love": 3842,
+    "surprise": 2187,
+    "fun": 1776,
+    "relief": 1526,
+    "hate": 1323,
+    "empty": 827,
+    "enthusiasm": 759,
+    "boredom": 179,
+    "anger": 110
+  },
+  "distribucion_limpia": {
+    "neutral": 8531,
+    "worry": 8422,
+    "happiness": 5172,
+    "sadness": 5143,
+    "love": 3775,
+    "surprise": 2177,
+    "fun": 1774,
+    "relief": 1516,
+    "hate": 1322,
+    "empty": 810,
+    "enthusiasm": 757,
+    "boredom": 179,
+    "anger": 110
+  },
+  "razon_desbalance_cruda": 78.52727272727273,
+  "razon_desbalance_limpia": 77.55454545454545,
+  "pct_neutral_worry": 42.7425,
+  "tweets_con_menciones": 18957,
+  "tweets_con_urls": 1909,
+  "tweets_con_html": 2301,
+  "tweets_con_hashtag": 819,
+  "empty_n": 827,
+  "empty_pct": 2.0675,
+  "tabla_decisiones": [
+    {
+      "decisión": "Eliminar textos con etiquetas contradictorias",
+      "por qué": "El mismo texto con 2+ emociones no tiene respuesta correcta única; se descartan todas sus copias",
+      "tweets afectados": 207
+    },
+    {
+      "decisión": "Conservar solo la 1.ª copia de textos duplicados",
+      "por qué": "Copias idénticas inflan métricas y pueden quedar en entrenamiento y prueba a la vez (fuga de datos)",
+      "tweets afectados": 28
+    },
+    {
+      "decisión": "Decodificar entidades HTML (&quot;, &amp;, &lt;, &gt;)",
+      "por qué": "Son artefactos de la exportación; el modelo debe ver '\"' y '&', no códigos",
+      "tweets afectados": 2301
+    },
+    {
+      "decisión": "Quitar URLs",
+      "por qué": "Direcciones únicas sin valor emocional; solo añaden vocabulario raro",
+      "tweets afectados": 1909
+    },
+    {
+      "decisión": "Quitar menciones @usuario",
+      "por qué": "Nombres de usuario no expresan emoción y fragmentan el vocabulario",
+      "tweets afectados": 18957
+    },
+    {
+      "decisión": "Quitar '#' y conservar la palabra",
+      "por qué": "El hashtag suele llevar el tema o emoción (p. ej. #fail)",
+      "tweets afectados": 819
+    },
+    {
+      "decisión": "Colapsar espacios múltiples",
+      "por qué": "Normaliza el texto tras las eliminaciones",
+      "tweets afectados": 13284
+    },
+    {
+      "decisión": "Descartar tweets que quedan vacíos tras limpiar",
+      "por qué": "Si solo había menciones/URLs no queda texto que clasificar",
+      "tweets afectados": 77
+    },
+    {
+      "decisión": "NO pasar a minúsculas ni quitar emoticonos/puntuación aquí",
+      "por qué": "Se deja para cada modelo (vectorizadores y spaCy lo gestionan; emoticonos como :( aportan señal)",
+      "tweets afectados": 0
+    },
+    {
+      "decisión": "Conservar la clase `empty` como 13.ª emoción",
+      "por qué": "La guía pide matriz de 13 clases; es una etiqueta ruidosa, no dato faltante",
+      "tweets afectados": 827
+    }
+  ],
+  "tiempo_s": 1.2
+}

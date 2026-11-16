@@ -1,0 +1,180 @@
+{
+  "tamanos": {
+    "train": 27781,
+    "val": 5953,
+    "test": 5954
+  },
+  "azar": 0.07692307692307693,
+  "clase_mayoritaria": "neutral",
+  "base_mayoritaria_accuracy": 0.21498152502519316,
+  "base_mayoritaria_f1_macro": 0.02722187958571702,
+  "hiperparametros": {
+    "NB": {
+      "alpha": 0.03,
+      "ngramas": [
+        1,
+        2
+      ],
+      "f1_val": 0.14277433072988222
+    },
+    "SVM": {
+      "C": 0.1,
+      "ngramas": [
+        1,
+        2
+      ],
+      "class_weight": "balanced",
+      "f1_val": 0.1873217015136422
+    }
+  },
+  "resultados": [
+    {
+      "modelo": "NB",
+      "fase": "Fase 4",
+      "f1_macro": 0.14441,
+      "accuracy": 0.29913,
+      "tiempo_s": 0.67897
+    },
+    {
+      "modelo": "SVM",
+      "fase": "Fase 4",
+      "f1_macro": 0.19756,
+      "accuracy": 0.26957,
+      "tiempo_s": 1.73442
+    }
+  ],
+  "mejor_nombre": "SVM",
+  "f1_por_clase": {
+    "neutral": {
+      "NB": 0.361,
+      "SVM": 0.3115,
+      "n_prueba": 1280
+    },
+    "worry": {
+      "NB": 0.3736,
+      "SVM": 0.3228,
+      "n_prueba": 1264
+    },
+    "happiness": {
+      "NB": 0.299,
+      "SVM": 0.2957,
+      "n_prueba": 776
+    },
+    "sadness": {
+      "NB": 0.2433,
+      "SVM": 0.2915,
+      "n_prueba": 772
+    },
+    "love": {
+      "NB": 0.3275,
+      "SVM": 0.4297,
+      "n_prueba": 566
+    },
+    "surprise": {
+      "NB": 0.0815,
+      "SVM": 0.1752,
+      "n_prueba": 327
+    },
+    "fun": {
+      "NB": 0.0485,
+      "SVM": 0.1486,
+      "n_prueba": 266
+    },
+    "relief": {
+      "NB": 0.037,
+      "SVM": 0.1517,
+      "n_prueba": 228
+    },
+    "hate": {
+      "NB": 0.0891,
+      "SVM": 0.2543,
+      "n_prueba": 198
+    },
+    "empty": {
+      "NB": 0.0,
+      "SVM": 0.0532,
+      "n_prueba": 121
+    },
+    "enthusiasm": {
+      "NB": 0.0168,
+      "SVM": 0.0776,
+      "n_prueba": 113
+    },
+    "boredom": {
+      "NB": 0.0,
+      "SVM": 0.0565,
+      "n_prueba": 27
+    },
+    "anger": {
+      "NB": 0.0,
+      "SVM": 0.0,
+      "n_prueba": 16
+    }
+  },
+  "top_confusiones": {
+    "NB": [
+      {
+        "real": "neutral",
+        "predicha": "worry",
+        "pct_de_la_real": 27.66,
+        "tweets": 354
+      },
+      {
+        "real": "worry",
+        "predicha": "neutral",
+        "pct_de_la_real": 26.5,
+        "tweets": 335
+      },
+      {
+        "real": "sadness",
+        "predicha": "worry",
+        "pct_de_la_real": 40.67,
+        "tweets": 314
+      },
+      {
+        "real": "happiness",
+        "predicha": "neutral",
+        "pct_de_la_real": 30.67,
+        "tweets": 238
+      },
+      {
+        "real": "sadness",
+        "predicha": "neutral",
+        "pct_de_la_real": 25.26,
+        "tweets": 195
+      }
+    ],
+    "SVM": [
+      {
+        "real": "worry",
+        "predicha": "sadness",
+        "pct_de_la_real": 14.32,
+        "tweets": 181
+      },
+      {
+        "real": "neutral",
+        "predicha": "worry",
+        "pct_de_la_real": 11.25,
+        "tweets": 144
+      },
+      {
+        "real": "worry",
+        "predicha": "neutral",
+        "pct_de_la_real": 10.92,
+        "tweets": 138
+      },
+      {
+        "real": "happiness",
+        "predicha": "love",
+        "pct_de_la_real": 16.62,
+        "tweets": 129
+      },
+      {
+        "real": "sadness",
+        "predicha": "worry",
+        "pct_de_la_real": 16.58,
+        "tweets": 128
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "hf_ok": false,
+  "llm_ok": false,
+  "bertopic": {
+    "ejecutado": false
+  },
+  "llm_zero_shot": {
+    "ejecutado": false
+  },
+  "embeddings": {
+    "ejecutado": false
+  },
+  "costo_1000_tweets": {
+    "tokens_entrada_aprox": 68998,
+    "caracteres_prompt_medio": 276.0,
+    "tiempo_prediccion_mejor_modelo_s": 0.0105
+  },
+  "drift": {
+    "psi_predicciones": 0.3502,
+    "interpretacion": "cambio fuerte",
+    "psi_etiquetas_reales": 0.5191,
+    "f1_macro_referencia": 0.1664,
+    "f1_macro_reciente": 0.1422,
+    "n_entrenamiento": 22224,
+    "n_referencia": 5557,
+    "n_reciente": 11907,
+    "clase_mayor_aporte": "happiness",
+    "tweet_id_corte": 1961995297
+  },
+  "parquet": {
+    "resultados_csv_mb": 0.000144,
+    "resultados_parquet_mb": 0.003586,
+    "corpus_csv_mb": 3.391162,
+    "corpus_parquet_snappy_mb": 2.246883,
+    "razon_resultados": 0.04,
+    "razon_corpus": 1.509,
+    "filas_resultados": 2
+  }
+}
