@@ -94,7 +94,7 @@ for nombre, modelo in modelos_finales.items():
     modelo.fit(X_train, y_train)
     tiempos[nombre] = time.perf_counter() - t0
     predicciones[nombre] = modelo.predict(X_test)            # única evaluación en prueba
-    filas_res.append({'modelo': nombre, 'fase': 'Fase 4',
+    filas_res.append({'modelo': nombre, 'fase': 4,
                       'f1_macro': f1_score(y_test, predicciones[nombre], average='macro'),
                       'accuracy': accuracy_score(y_test, predicciones[nombre]),
                       'tiempo_s': tiempos[nombre]})
@@ -195,4 +195,4 @@ with open('results/fase4.json', 'w') as f:
     json.dump(salida, f, indent=2, default=str)
 
 # %% [conclusion]
-# CONCLUSION_PLACEHOLDER
+# **Conclusión de negocio (Fase 4).** Con 13 emociones, el mejor clasificador clásico es el SVM lineal (TF-IDF con unigramas y bigramas, C=0.1, class_weight balanceado): F1 macro de 0.198 y accuracy de 0.270 en prueba, frente a 0.144 y 0.299 de Naive Bayes (alpha=0.03). Ambos superan el azar (1/13 = 0.077 de F1 macro; el SVM lo multiplica por 2.6) y la clase mayoritaria (siempre «neutral»: accuracy 0.215, F1 macro 0.027), pero siguen siendo modelos débiles: no deberían decidir solos ninguna acción sobre un cliente. NB gana en accuracy porque favorece las clases grandes (neutral, worry) y casi ignora las pequeñas (F1 de 0.00 en empty y anger); el SVM con pesos reparte mejor los aciertos (F1 de 0.43 en love, 0.25 en hate), por eso se elige por F1 macro. Los dos entrenan en segundos (0.7 s y 1.7 s). Las confusiones dominantes son neutral↔worry (NB: 354 y 335 tweets; SVM: 144 y 138), sadness→worry (NB 314; SVM 128), happiness→neutral en NB y happiness→love en SVM (129): son emociones vecinas en el vocabulario (preocupación y tristeza comparten palabras de malestar; neutral es una clase «cajón» sin señal léxica propia; happiness y love comparten palabras afectivas). Recomendación: usar el SVM como línea base, vigilar el F1 por clase y no confiar en las emociones raras (anger, boredom, empty, enthusiasm: F1 ≤ 0.08). El ajuste de hiperparámetros se hizo solo en validación; en NB y SVM el mejor valor quedó en el borde de la rejilla (alpha=0.03; C=0.1 con 0.03 también probado), mejora pequeña esperable con más búsqueda.

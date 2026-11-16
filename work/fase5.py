@@ -92,7 +92,7 @@ plt.tight_layout(); plt.savefig('figuras/fase5_curva_entrenamiento.png', dpi=150
 # **Comparación NB vs SVM vs RNN.** Se añade la fila de la RNN a `resultados` y se arma una tabla con F1 macro, accuracy, tiempo de entrenamiento y tamaño (parámetros). Para NB y SVM el tamaño es el número de coeficientes aprendidos.
 
 # %% [code]
-resultados = pd.concat([resultados, pd.DataFrame([{'modelo': 'RNN', 'fase': 'Fase 5',
+resultados = pd.concat([resultados, pd.DataFrame([{'modelo': 'RNN', 'fase': 5,
                         'f1_macro': res_rnn['f1_macro'], 'accuracy': res_rnn['accuracy'],
                         'tiempo_s': res_rnn['tiempo_s']}])], ignore_index=True)
 
@@ -105,7 +105,7 @@ def n_parametros(pipe):
 
 params = {'NB': n_parametros(modelos_finales['NB']), 'SVM': n_parametros(modelos_finales['SVM']),
           'RNN': res_rnn['parametros']}
-comparacion = resultados[resultados.fase.isin(['Fase 4', 'Fase 5'])].copy()
+comparacion = resultados[resultados.fase.isin([4, 5])].copy()
 comparacion['parametros'] = comparacion['modelo'].map(params)
 print(comparacion.round(4).to_string(index=False))
 rel = comparacion.set_index('modelo')
@@ -146,4 +146,4 @@ with open('results/fase5.json', 'w') as archivo:
     json.dump(salida5, archivo, indent=2)
 
 # %% [conclusion]
-# CONCLUSION_PLACEHOLDER
+# **Conclusión de negocio (Fase 5).** La RNN (embedding 64, GRU bidireccional de 64, class_weight balanceado) NO supera al SVM: obtiene F1 macro de 0.149 y accuracy de 0.176 en prueba, frente a 0.198 y 0.270 del SVM y 0.144 y 0.299 de NB; queda prácticamente empatada con NB en F1 macro y por debajo en accuracy. Además es mucho más cara: 95 s de entrenamiento en 5 épocas (la mejor fue la 3; la pérdida de validación empieza a subir desde ahí mientras la de entrenamiento sigue bajando, es decir, sobreajuste rápido) frente a 1.7 s del SVM y 0.7 s de NB (alrededor de 55 y 140 veces más, con variaciones entre corridas por la CPU compartida), y con 1.33 millones de parámetros frente a 0.50 millones de coeficientes. Para el desbalance se usaron pesos de clase 'balanced' (neutral y worry pesan 0.36; boredom 17.1 y anger 27.8): eso obliga al modelo a prestar atención a las emociones pequeñas, pero baja la accuracy porque sacrifica las grandes (F1 de neutral 0.10 y worry 0.11, contra 0.31 y 0.32 del SVM) y, con solo 110 tweets de anger, los pesos altos tienden a memorizar esos ejemplos. La alternativa de muestreo (sobremuestrear clases raras o submuestrear neutral/worry) tendría efectos parecidos y no se probó. La RNN solo gana al SVM en sadness (0.30 vs 0.29) y boredom, con diferencias pequeñas. Recomendación: con 28 mil tweets cortos y etiquetas ruidosas, un modelo lineal TF-IDF es la opción de mejor costo-beneficio; una RNN solo se justificaría con más datos o embeddings preentrenados.

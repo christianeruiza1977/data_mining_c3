@@ -2,6 +2,11 @@
 # Se aplica LDA (scikit-learn) sobre la bolsa de palabras de `muestra_temas` (5 000 tweets, la misma que usará BERTopic en la Fase 9). El número de temas se elige con la perplejidad sobre un conjunto de validación (80/20) y una regla explícita de codo; luego se interpretan los temas y se cruzan con las emociones.
 
 # %% [code]
+# Muestra de 5 000 tweets: es la MISMA que usará BERTopic en la Fase 9, para poder comparar ambos métodos
+muestra_temas = df.sample(5000, random_state=SEMILLA)
+print(muestra_temas.shape)
+
+# %% [code]
 import time, json
 import numpy as np, pandas as pd
 import matplotlib.pyplot as plt

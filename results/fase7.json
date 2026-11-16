@@ -28,49 +28,56 @@
     "f1_macro_sklearn": 0.1424,
     "accuracy": 0.2361,
     "f1_ponderado_mllib": 0.2362,
-    "tiempo_entrenamiento_s": 2.3,
-    "tiempo_prediccion_eval_s": 1.6
+    "tiempo_entrenamiento_s": 1.47,
+    "tiempo_prediccion_eval_s": 0.89
   },
-  "tiempo_sesion_spark_s": 8.6,
+  "tiempo_sesion_spark_s": 7.3,
   "tiempos_spark_s": {
-    "caracteristicas": 5.2,
-    "ajuste_smoothing": 6.9,
-    "entrenamiento_final": 2.3,
-    "prediccion_eval": 1.6,
-    "total_punta_a_punta": 24.5
+    "caracteristicas": 3.6,
+    "ajuste_smoothing": 3.7,
+    "entrenamiento_final": 1.47,
+    "prediccion_eval": 0.89,
+    "total_punta_a_punta": 17.0
   },
   "sklearn_nb_mismo_algoritmo": {
     "f1_macro": 0.0965,
     "accuracy": 0.2916,
-    "entrenar_s": 0.42,
-    "predecir_s": 0.06
+    "entrenar_s": 0.36,
+    "predecir_s": 0.09
   },
   "comparacion_tiempos": [
     {
-      "modelo": "TF-IDF + SVM (stub)",
+      "modelo": "NB",
       "motor": "sklearn",
-      "f1_macro": 0.1671,
-      "accuracy": 0.3137,
-      "tiempo_s": 19.36
+      "f1_macro": 0.1444060389435646,
+      "accuracy": 0.29912663755458513,
+      "tiempo_s": 0.7341874820003795
+    },
+    {
+      "modelo": "SVM",
+      "motor": "sklearn",
+      "f1_macro": 0.19755755622020496,
+      "accuracy": 0.2695666778636211,
+      "tiempo_s": 1.704571144000056
     },
     {
       "modelo": "Spark MLlib (TF-IDF + NB, smoothing=1.0)",
       "motor": "Spark",
       "f1_macro": 0.1424,
       "accuracy": 0.2361,
-      "tiempo_s": 2.3
+      "tiempo_s": 1.47
     },
     {
       "modelo": "sklearn TF-IDF + NB (mismo algoritmo)",
       "motor": "sklearn",
       "f1_macro": 0.0965,
       "accuracy": 0.2916,
-      "tiempo_s": 0.42
+      "tiempo_s": 0.36
     }
   ],
   "mapreduce": {
-    "tiempo_rdd_s": 1.15,
-    "tiempo_dataframe_s": 2.85,
+    "tiempo_rdd_s": 0.64,
+    "tiempo_dataframe_s": 2.21,
     "top15": [
       [
         "day",
