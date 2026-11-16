@@ -33,14 +33,14 @@
       "fase": 4,
       "f1_macro": 0.14441,
       "accuracy": 0.29913,
-      "tiempo_s": 0.73419
+      "tiempo_s": 0.71237
     },
     {
       "modelo": "SVM",
       "fase": 4,
       "f1_macro": 0.19756,
       "accuracy": 0.26957,
-      "tiempo_s": 1.70457
+      "tiempo_s": 1.56122
     }
   ],
   "mejor_nombre": "SVM",
