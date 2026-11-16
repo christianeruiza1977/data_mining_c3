@@ -13,7 +13,7 @@
   "costo_1000_tweets": {
     "tokens_entrada_aprox": 68998,
     "caracteres_prompt_medio": 276.0,
-    "tiempo_prediccion_mejor_modelo_s": 0.0105
+    "tiempo_prediccion_mejor_modelo_s": 0.0129
   },
   "drift": {
     "psi_predicciones": 0.3502,
@@ -25,7 +25,37 @@
     "n_referencia": 5557,
     "n_reciente": 11907,
     "clase_mayor_aporte": "happiness",
-    "tweet_id_corte": 1961995297
+    "tweet_id_corte": 1961995297,
+    "pct_predicho_referencia": {
+      "anger": 0.0,
+      "boredom": 0.0,
+      "empty": 0.0,
+      "enthusiasm": 0.1,
+      "fun": 1.0,
+      "happiness": 20.0,
+      "hate": 0.8,
+      "love": 11.2,
+      "neutral": 36.5,
+      "relief": 1.2,
+      "sadness": 6.8,
+      "surprise": 1.1,
+      "worry": 21.2
+    },
+    "pct_predicho_reciente": {
+      "anger": 0.0,
+      "boredom": 0.0,
+      "empty": 0.1,
+      "enthusiasm": 0.1,
+      "fun": 0.7,
+      "happiness": 8.0,
+      "hate": 1.7,
+      "love": 4.2,
+      "neutral": 31.3,
+      "relief": 0.7,
+      "sadness": 14.8,
+      "surprise": 1.2,
+      "worry": 37.1
+    }
   },
   "parquet": {
     "resultados_csv_mb": 0.000144,
