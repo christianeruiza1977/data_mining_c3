@@ -109,10 +109,8 @@ for i, nombre in ((90, "Kevin Ambuludi"), (95, "Rodrigo Soria"), (100, "Christia
 for i in range(105, 110): hijos[i].getparent().remove(hijos[i])      # el grupo es de 3 integrantes
 
 # --- Checklist: ☑ cumple, ◐ parcial (queda pendiente algo manual o de Colab) ---
-estado = {114: "☑", 115: "☑", 116: "◐", 117: "☑", 118: "☑", 119: "☑", 120: "◐", 121: "◐"}
-nota = {116: " (LDA listo; BERTopic escrito y pendiente de ejecutar en Colab)",
-        120: " (PSI y Parquet ejecutados; LLM zero-shot y embeddings pendientes de ejecutar en Colab)",
-        121: " (tabla de alternativas lista; la reflexión individual la completa cada integrante)"}
+estado = {114: "☑", 115: "☑", 116: "☑", 117: "☑", 118: "☑", 119: "☑", 120: "☑", 121: "◐"}
+nota = {121: " (tabla de alternativas lista; la reflexión individual la completa cada integrante)"}
 for i, sim in estado.items():
     par = P(i)
     par.runs[0].text = par.runs[0].text.replace("•", sim, 1)
