@@ -1,0 +1,122 @@
+{
+  "rnn": {
+    "f1_macro": 0.14905461289107064,
+    "accuracy": 0.17635203224722876,
+    "tiempo_s": 61.90794606400004,
+    "epocas": 5,
+    "mejor_epoca": 3,
+    "parametros": 1331597,
+    "config": {
+      "max_tokens": 20000,
+      "largo": 40,
+      "dim_emb": 64,
+      "unidades": 64,
+      "batch": 128,
+      "class_weight": "balanced",
+      "paciencia": 2
+    }
+  },
+  "peso_clase": {
+    "neutral": 0.358,
+    "worry": 0.363,
+    "happiness": 0.59,
+    "sadness": 0.594,
+    "love": 0.809,
+    "surprise": 1.402,
+    "fun": 1.721,
+    "relief": 2.014,
+    "hate": 2.31,
+    "empty": 3.769,
+    "enthusiasm": 4.032,
+    "boredom": 17.096,
+    "anger": 27.753
+  },
+  "comparacion": [
+    {
+      "modelo": "NB",
+      "fase": 4,
+      "f1_macro": 0.14441,
+      "accuracy": 0.29913,
+      "tiempo_s": 0.73419,
+      "parametros": 502268
+    },
+    {
+      "modelo": "SVM",
+      "fase": 4,
+      "f1_macro": 0.19756,
+      "accuracy": 0.26957,
+      "tiempo_s": 1.70457,
+      "parametros": 502268
+    },
+    {
+      "modelo": "RNN",
+      "fase": 5,
+      "f1_macro": 0.14905,
+      "accuracy": 0.17635,
+      "tiempo_s": 61.90795,
+      "parametros": 1331597
+    }
+  ],
+  "f1_por_clase": {
+    "RNN": {
+      "anger": 0.0099,
+      "boredom": 0.087,
+      "empty": 0.0431,
+      "enthusiasm": 0.0736,
+      "fun": 0.1375,
+      "happiness": 0.1889,
+      "hate": 0.2483,
+      "love": 0.3913,
+      "neutral": 0.1024,
+      "relief": 0.1277,
+      "sadness": 0.3022,
+      "surprise": 0.1139,
+      "worry": 0.1121
+    },
+    "SVM": {
+      "neutral": 0.3115,
+      "worry": 0.3228,
+      "happiness": 0.2957,
+      "sadness": 0.2915,
+      "love": 0.4297,
+      "surprise": 0.1752,
+      "fun": 0.1486,
+      "relief": 0.1517,
+      "hate": 0.2543,
+      "empty": 0.0532,
+      "enthusiasm": 0.0776,
+      "boredom": 0.0565,
+      "anger": 0.0
+    }
+  },
+  "historial": {
+    "accuracy": [
+      0.10802,
+      0.20316,
+      0.27015,
+      0.36334,
+      0.46035
+    ],
+    "loss": [
+      2.52531,
+      2.25992,
+      1.85786,
+      1.41671,
+      1.11545
+    ],
+    "val_accuracy": [
+      0.15118,
+      0.17403,
+      0.17185,
+      0.18109,
+      0.19301
+    ],
+    "val_loss": [
+      2.41933,
+      2.36722,
+      2.35651,
+      2.47224,
+      2.65394
+    ]
+  }
+}

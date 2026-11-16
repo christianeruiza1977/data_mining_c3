@@ -1,0 +1,276 @@
+{
+  "spark_version": "4.0.1",
+  "filas": {
+    "corpus": 39688,
+    "train": 27781,
+    "val": 5953,
+    "test": 5954
+  },
+  "validacion_smoothing": [
+    {
+      "smoothing": 0.1,
+      "f1_macro_val": 0.1352,
+      "accuracy_val": 0.1939
+    },
+    {
+      "smoothing": 0.3,
+      "f1_macro_val": 0.1401,
+      "accuracy_val": 0.2075
+    },
+    {
+      "smoothing": 1.0,
+      "f1_macro_val": 0.1509,
+      "accuracy_val": 0.2382
+    }
+  ],
+  "mejor_smoothing": 1.0,
+  "mllib_test": {
+    "f1_macro_sklearn": 0.1424,
+    "accuracy": 0.2361,
+    "f1_ponderado_mllib": 0.2362,
+    "tiempo_entrenamiento_s": 1.47,
+    "tiempo_prediccion_eval_s": 0.89
+  },
+  "tiempo_sesion_spark_s": 7.3,
+  "tiempos_spark_s": {
+    "caracteristicas": 3.6,
+    "ajuste_smoothing": 3.7,
+    "entrenamiento_final": 1.47,
+    "prediccion_eval": 0.89,
+    "total_punta_a_punta": 17.0
+  },
+  "sklearn_nb_mismo_algoritmo": {
+    "f1_macro": 0.0965,
+    "accuracy": 0.2916,
+    "entrenar_s": 0.36,
+    "predecir_s": 0.09
+  },
+  "comparacion_tiempos": [
+    {
+      "modelo": "NB",
+      "motor": "sklearn",
+      "f1_macro": 0.1444060389435646,
+      "accuracy": 0.29912663755458513,
+      "tiempo_s": 0.7341874820003795
+    },
+    {
+      "modelo": "SVM",
+      "motor": "sklearn",
+      "f1_macro": 0.19755755622020496,
+      "accuracy": 0.2695666778636211,
+      "tiempo_s": 1.704571144000056
+    },
+    {
+      "modelo": "Spark MLlib (TF-IDF + NB, smoothing=1.0)",
+      "motor": "Spark",
+      "f1_macro": 0.1424,
+      "accuracy": 0.2361,
+      "tiempo_s": 1.47
+    },
+    {
+      "modelo": "sklearn TF-IDF + NB (mismo algoritmo)",
+      "motor": "sklearn",
+      "f1_macro": 0.0965,
+      "accuracy": 0.2916,
+      "tiempo_s": 0.36
+    }
+  ],
+  "mapreduce": {
+    "tiempo_rdd_s": 0.64,
+    "tiempo_dataframe_s": 2.21,
+    "top15": [
+      [
+        "day",
+        3075
+      ],
+      [
+        "good",
+        2290
+      ],
+      [
+        "get",
+        2008
+      ],
+      [
+        "like",
+        1939
+      ],
+      [
+        "today",
+        1647
+      ],
+      [
+        "love",
+        1631
+      ],
+      [
+        "got",
+        1627
+      ],
+      [
+        "work",
+        1625
+      ],
+      [
+        "going",
+        1571
+      ],
+      [
+        "lol",
+        1449
+      ],
+      [
+        "happy",
+        1390
+      ],
+      [
+        "one",
+        1390
+      ],
+      [
+        "time",
+        1387
+      ],
+      [
+        "know",
+        1352
+      ],
+      [
+        "back",
+        1345
+      ]
+    ],
+    "palabras_distintas": 29425
+  },
+  "plan_explain": {
+    "exchange_agregacion": 1,
+    "exchange_sql": 2,
+    "exchange_ventana": 2
+  },
+  "sql_por_emocion": [
+    {
+      "sentiment": "neutral",
+      "n_tweets": 8531,
+      "long_media": 55.8
+    },
+    {
+      "sentiment": "worry",
+      "n_tweets": 8422,
+      "long_media": 69.8
+    },
+    {
+      "sentiment": "happiness",
+      "n_tweets": 5172,
+      "long_media": 67.2
+    },
+    {
+      "sentiment": "sadness",
+      "n_tweets": 5143,
+      "long_media": 68.5
+    },
+    {
+      "sentiment": "love",
+      "n_tweets": 3775,
+      "long_media": 65.7
+    },
+    {
+      "sentiment": "surprise",
+      "n_tweets": 2177,
+      "long_media": 66.9
+    },
+    {
+      "sentiment": "fun",
+      "n_tweets": 1774,
+      "long_media": 71.5
+    },
+    {
+      "sentiment": "relief",
+      "n_tweets": 1516,
+      "long_media": 69.4
+    },
+    {
+      "sentiment": "hate",
+      "n_tweets": 1322,
+      "long_media": 72.4
+    },
+    {
+      "sentiment": "empty",
+      "n_tweets": 810,
+      "long_media": 57.3
+    },
+    {
+      "sentiment": "enthusiasm",
+      "n_tweets": 757,
+      "long_media": 66.0
+    },
+    {
+      "sentiment": "boredom",
+      "n_tweets": 179,
+      "long_media": 69.6
+    },
+    {
+      "sentiment": "anger",
+      "n_tweets": 110,
+      "long_media": 70.2
+    }
+  ],
+  "top5_por_emocion": {
+    "anger": "get (8), good (6), know (6), work (6), day (5)",
+    "boredom": "bored (30), work (15), like (12), really (12), still (11)",
+    "empty": "get (41), bored (38), work (37), day (33), today (29)",
+    "enthusiasm": "good (54), get (45), want (44), day (42), today (37)",
+    "fun": "lol (192), fun (142), good (115), day (108), haha (104)",
+    "happiness": "day (630), good (560), happy (399), thanks (299), great (296)",
+    "hate": "hate (210), like (94), work (85), get (77), sucks (72)",
+    "love": "love (861), day (722), happy (545), good (322), mother's (249)",
+    "neutral": "day (399), get (373), good (352), like (337), work (331)",
+    "relief": "day (152), good (127), thanks (96), finally (86), time (83)",
+    "sadness": "sad (385), day (355), miss (340), work (330), get (302)",
+    "surprise": "day (129), get (118), good (97), like (97), got (96)",
+    "worry": "get (538), like (454), day (441), work (394), good (393)"
+  },
+  "volumen": {
+    "bytes_texto_por_tweet": 65.6,
+    "mb_corpus_texto": 2.6,
+    "mb_texto_original": 2.93,
+    "factor_ram_tfidf": 2.01,
+    "supuestos": {
+      "bytes_registro": 500,
+      "dias_historia": 365,
+      "ram_nodo_gb": 64,
+      "uso_max_ram": 0.5
+    },
+    "escenarios": [
+      {
+        "escenario": "10 mil/día",
+        "tweets_dia": 10000,
+        "GB_dia": 0.005,
+        "GB_anio": 1.8,
+        "RAM_estimada_GB": 5.5,
+        "cabe_en_un_nodo": true,
+        "RAM_30d_GB": 0.5,
+        "cabe_30d": true
+      },
+      {
+        "escenario": "1 millón/día",
+        "tweets_dia": 1000000,
+        "GB_dia": 0.5,
+        "GB_anio": 182.5,
+        "RAM_estimada_GB": 550.2,
+        "cabe_en_un_nodo": false,
+        "RAM_30d_GB": 45.2,
+        "cabe_30d": false
+      },
+      {
+        "escenario": "100 millones/día",
+        "tweets_dia": 100000000,
+        "GB_dia": 50.0,
+        "GB_anio": 18250.0,
+        "RAM_estimada_GB": 55021.3,
+        "cabe_en_un_nodo": false,
+        "RAM_30d_GB": 4522.3,
+        "cabe_30d": false
+      }
+    ]
+  }
+}
