@@ -28,7 +28,7 @@ alternativas = pd.DataFrame([
      "Doc. spaCy: spacy.io/usage/linguistic-features; Tema 3, L1 Minería de textos"],
     ["LDA (scikit-learn)",
      "No supervisado, barato e interpretable con palabras clave; sirve para explorar el corpus.",
-     "Hay que fijar K; con textos cortos la perplejidad no muestra un codo claro; los temas son mezclas poco nítidas.",
+     "Hay que fijar K; con textos cortos la perplejidad de validación no se estabiliza con K; los temas son mezclas poco nítidas.",
      "Exploración inicial de un corpus largo y sin etiquetas (reclamos, informes).",
      "Doc. scikit-learn (LatentDirichletAllocation); Tema 3, L1"],
     ["Naive Bayes multinomial",
@@ -37,13 +37,13 @@ alternativas = pd.DataFrame([
      "Prototipo y línea base cuando se necesita una respuesta casi inmediata.",
      "Doc. scikit-learn (naive_bayes); Tema 3, L1"],
     ["SVM lineal (TF-IDF)",
-     "Mejor F1 macro de los tres modelos en la fase 4 y en todos los k de la fase 6; entrena en segundos; barato de operar.",
+     "Mejor F1 macro de NB y SVM en la fase 4 y en todos los k de la fase 6; entrena en segundos; barato de operar.",
      "No entiende el orden ni el contexto; sigue fallando en las clases raras (anger, boredom).",
      "Opción por defecto para clasificar texto con muchos datos etiquetados y poco presupuesto.",
      "Doc. scikit-learn (svm, LinearSVC); Tema 3, L1"],
     ["RNN (BiGRU en Keras)",
      "Captura el orden de las palabras y puede mejorar con más datos y embeddings preentrenados.",
-     "Unas 55 veces más lenta que el SVM, con más parámetros, y no lo superó en este dato (fase 5).",
+     "Unas 36 veces más lenta que el SVM, con más parámetros, y no lo superó en este dato (fase 5).",
      "Cuando hay mucho texto etiquetado, GPU y el orden de las palabras importa de verdad.",
      "Doc. Keras (GRU, TextVectorization); Tema 3, L1"],
     ["scikit-learn (un solo nodo)",
@@ -70,7 +70,7 @@ alternativas.to_csv("results/fase8_alternativas.csv", index=False)
 # **Respuesta al desafío (con la evidencia de este notebook).**
 #
 # 1. **Granularidad:** no recomendamos usar las 13 emociones con confianza. Con 13 clases el mejor F1 macro en prueba fue 0,198 (SVM; azar = 0,077). En el experimento de la fase 6 el SVM promedió 0,543 con 3 clases, 0,393 con 5, 0,316 con 7, 0,258 con 9 y 0,229 con 11. Con el criterio fijado de antemano (F1 macro de al menos 0,30 y al menos el doble del azar), el máximo es 7 clases. Recomendamos 5 a 7 categorías (por ejemplo neutral, worry, sadness, happiness, love y hate, y agrupar el resto). El experimento sortea clases y no prueba agrupaciones, así que esta es una hipótesis que hay que validar.
-# 2. **Modelo:** SVM lineal con TF-IDF. Tuvo el mejor F1 macro (0,198 frente a 0,144 de NB y 0,149 de la RNN) y entrena en cerca de 2 segundos, frente a cerca de 95 s de la RNN. NB es el más rápido (menos de 1 s) y tiene la accuracy más alta, pero no detecta bien las clases pequeñas. La RNN no justifica su costo con este dato.
-# 3. **Spark:** hoy no se justifica. Con 40 000 tweets (3,8 MB en CSV) Spark local fue mucho más lento que scikit-learn por la sobrecarga de arranque. En la estimación de volumen de la fase 7, un millón de tweets al día suma cerca de 180 GB al año de texto y sí superaría una sola máquina al conservar el histórico; con 10 mil al día basta un nodo. Recomendamos empezar con scikit-learn y migrar a Spark sobre EMR con datos en S3 (Parquet) cuando el histórico ya no quepa en memoria.
+# 2. **Modelo:** SVM lineal con TF-IDF. Tuvo el mejor F1 macro (0,198 frente a 0,144 de NB y 0,149 de la RNN) y entrena en unos 2 segundos (1,7 s), frente a unos 62 s de la RNN. NB es el más rápido (menos de 1 s) y tiene la accuracy más alta, pero no detecta bien las clases pequeñas. La RNN no justifica su costo con este dato.
+# 3. **Spark:** hoy no se justifica. Con 40 000 tweets (3,8 MB en CSV) Spark local fue mucho más lento que scikit-learn por la sobrecarga de arranque (17,0 s frente a 0,45 s del flujo completo del NB en sklearn, unas 38 veces). En la estimación de volumen de la fase 7, un millón de tweets al día suma unos 182,5 GB al año (con el supuesto de 500 bytes por registro) y sí superaría una sola máquina al conservar el histórico; con 10 mil al día basta un nodo. Recomendamos empezar con scikit-learn y migrar a Spark sobre EMR con datos en S3 (Parquet) cuando el histórico ya no quepa en memoria.
 # 4. **Limitación seria del dataset:** las etiquetas son ruidosas y muy desbalanceadas (anger tiene 110 tweets y neutral 8 638; la razón es 78,5), la clase `empty` mezcla tweets con emoción evidente y los textos son tweets en inglés de una época concreta. No representan los mensajes en español de clientes en Ecuador. Además, el PSI de 0,35 de la fase 9 muestra que el modelo ya pierde estabilidad entre tramos de tiempo.
 # 5. **Implicación ética:** analizar la emoción de personas es un tratamiento de datos personales (LOPDP). No debe usarse para decisiones automáticas con efecto sobre el cliente sin una persona que revise, y enviar mensajes a una API externa exige base legal y minimización. Con un F1 macro cercano a 0,2, el modelo se equivocaría en la mayoría de las clases raras, por lo que debe servir solo para priorizar la atención y no para etiquetar a las personas.

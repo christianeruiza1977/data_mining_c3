@@ -1,5 +1,5 @@
 # %% [que]
-# Se aplica LDA (scikit-learn) sobre la bolsa de palabras de `muestra_temas` (5 000 tweets, la misma que usará BERTopic en la Fase 9). El número de temas se elige con la perplejidad sobre un conjunto de validación (80/20) y una regla explícita de codo; luego se interpretan los temas y se cruzan con las emociones.
+# Se aplica LDA (scikit-learn) sobre la bolsa de palabras de `muestra_temas` (5 000 tweets, la misma que usará BERTopic en la Fase 9). El número de temas se elige con la perplejidad sobre un conjunto de validación (80/20) con la coherencia NPMI como confirmación (rejilla de K = 5 a 20); luego se interpretan los temas y se cruzan con las emociones.
 
 # %% [code]
 # Muestra de 5 000 tweets: es la MISMA que usará BERTopic en la Fase 9, para poder comparar ambos métodos
@@ -76,7 +76,7 @@ plt.savefig("figuras/fase3_perplejidad.png", dpi=150)
 plt.show()
 
 # %% [md]
-# **Qué se analiza:** se aplica el criterio de elección y se comprueba que las dos medidas coincidan. Nota técnica: con tweets muy cortos (pocas palabras útiles por documento) la perplejidad de validación de LDA tiende a SUBIR con K porque los temas extra se sobreajustan a muy poco texto; por eso no aparece un «codo» clásico y se usa el menor K permitido por la rejilla si la coherencia lo respalda.
+# **Qué se analiza:** se aplica el criterio de elección y se comprueba que las dos medidas coincidan. Nota técnica: con tweets muy cortos (pocas palabras útiles por documento) la perplejidad de validación de LDA tiende a SUBIR con K porque los temas extra se sobreajustan a muy poco texto; por eso se usa el menor K permitido por la rejilla si la coherencia lo respalda.
 
 # %% [code]
 # Criterio: menor perplejidad de validación, confirmada por la mayor coherencia NPMI
@@ -153,7 +153,7 @@ print("Guardado results/fase3.json")
 
 # %% [conclusion]
 # **Conclusión de negocio (Fase 3).** LDA sobre `muestra_temas` (5 000 tweets; 4 748 con palabras útiles tras quitar stop words y tokens basura; vocabulario de 1 038 palabras).
-# - Número de temas: K = 5. Criterio: menor perplejidad en el 20 % de validación, confirmada por la coherencia NPMI. La perplejidad de validación sube con K (2 843 con K = 5; 10 703 con K = 20) y la coherencia baja (de -0,193 a -0,401), porque los tweets tienen muy pocas palabras útiles y los temas extra se sobreajustan. No hay un codo clásico: es una limitación del texto corto, y por eso K = 5 es un tema-resumen amplio, no una taxonomía fina.
+# - Número de temas: K = 5. Criterio: menor perplejidad en el 20 % de validación, confirmada por la coherencia NPMI. La perplejidad de validación sube con K (2 843 con K = 5; 10 703 con K = 20) y la coherencia NPMI baja en general (de -0,193 con K = 5 a -0,401 con K = 20; el mínimo fue -0,427 con K = 15), porque los tweets tienen muy pocas palabras útiles y los temas extra se sobreajustan. Ningún K mayor mejora estas medidas: es una limitación del texto corto, y por eso K = 5 es un tema-resumen amplio, no una taxonomía fina.
 # - Tres temas interpretables: Tema 4 (`day, happy, make, fun, mothers, mother, mom`) = celebraciones y Día de la Madre; Tema 3 (`work, miss, need, week, wish, feel, feeling`) = trabajo, añoranza y sentimientos; Tema 0 (`home, today, night, working, going, house, wait`) = rutina diaria en casa y por la noche. Los temas 1 y 2 mezclan cortesías y expresiones sueltas (`good, thanks, nice` / `love, really, sad, hey`) y son menos claros.
-# - Cruce con emociones: el Tema 4 concentra 31,4 % de los tweets de `love` (1,68 veces lo esperado), 25,2 % de `happiness` y 24,5 % de `fun`, frente a solo 10,2 % de `hate`; el Tema 3 reúne 24,4 % de `sadness` y de `enthusiasm` y 23,9 % de `hate`. El resto de celdas queda entre 15 % y 26 %, cerca del 20 % de un reparto al azar.
+# - Cruce con emociones: el Tema 4 concentra 31,4 % de los tweets de `love` (1,68 veces lo esperado), 25,2 % de `happiness` y 24,5 % de `fun`, frente a solo 10,2 % de `hate`; el Tema 3 reúne 24,4 % de `sadness` y de `enthusiasm` y 23,9 % de `hate`. Casi todas las demás celdas quedan entre 14 % y 27 %, cerca del 20 % de un reparto al azar; salen de ese rango `empty` en el Tema 1 (33,0 %) y en el Tema 4 (9,9 %), `happiness` en el Tema 3 (13,6 %) y `love` en el Tema 3 (9,4 %).
 # - Lectura honesta: los temas describen de qué hablan los tweets (celebraciones, trabajo, casa), no cómo se sienten. Separan emociones positivas de afecto (love, happiness, fun) de las negativas, pero no distinguen emociones vecinas. Valen como contexto de negocio (p. ej. picos de positividad en fechas como el Día de la Madre), no como clasificador. `anger` (10 tweets) y `boredom` (26) tienen muy pocos tweets en la muestra y sus porcentajes no son fiables.

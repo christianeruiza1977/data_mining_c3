@@ -146,7 +146,7 @@ dibujar_matriz(predicciones['NB'], 'Naive Bayes: matriz de confusión (% por fil
 dibujar_matriz(predicciones['SVM'], 'SVM lineal: matriz de confusión (% por fila, prueba)', 'figuras/fase4_matriz_svm.png')
 
 # %% [md]
-# **Qué se analiza:** los 5 pares (real → predicha) con más confusión fuera de la diagonal, medidos como porcentaje de la clase real, para ver qué emociones se parecen entre sí desde el punto de vista del texto.
+# **Qué se analiza:** los 5 pares (real → predicha) con más confusión fuera de la diagonal, medidos como porcentaje de la clase real, para ver qué emociones se parecen entre sí desde el punto de vista del texto. Debajo se añade una figura de apoyo con el F1 por clase de ambos modelos (el mejor resaltado en color) para ver en qué emociones gana cada uno.
 
 # %% [code]
 def top_confusiones(pred, n=5):

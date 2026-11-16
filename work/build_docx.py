@@ -67,6 +67,7 @@ def volcar_md(ref_el, ruta_md):
             figuras += re.findall(r"figuras/[\w\-\.]+\.(?:png|svg)", l); continue
         if not l.strip(): cerrar_parrafo(); continue
         if re.match(r"^\s*[-*] ", l): cerrar_parrafo(); nuevo_parrafo_antes(ref_el, "•  " + re.sub(r"^\s*[-*] ", "", l)); continue
+        if re.match(r"^\d+\. ", l): cerrar_parrafo()   # cada ítem numerado es un párrafo
         bloque.append(l.strip())
     cerrar_parrafo(); cerrar_tabla()
     for f in figuras:
@@ -106,5 +107,15 @@ reemplazar(P(8), "[dd/mm/aaaa]", datetime.date.today().strftime("%d/%m/%Y"))
 for i, nombre in ((90, "Kevin Ambuludi"), (95, "Rodrigo Soria"), (100, "Christian Ruiz")):
     reemplazar(P(i), "[nombre]", nombre)
 for i in range(105, 110): hijos[i].getparent().remove(hijos[i])      # el grupo es de 3 integrantes
+
+# --- Checklist: ☑ cumple, ◐ parcial (queda pendiente algo manual o de Colab) ---
+estado = {114: "☑", 115: "☑", 116: "◐", 117: "☑", 118: "☑", 119: "☑", 120: "◐", 121: "◐"}
+nota = {116: " (LDA listo; BERTopic escrito y pendiente de ejecutar en Colab)",
+        120: " (PSI y Parquet ejecutados; LLM zero-shot y embeddings pendientes de ejecutar en Colab)",
+        121: " (tabla de alternativas lista; la reflexión individual la completa cada integrante)"}
+for i, sim in estado.items():
+    par = P(i)
+    par.runs[0].text = par.runs[0].text.replace("•", sim, 1)
+    if i in nota: par.add_run(nota[i]).italic = True
 doc.save(SALIDA)
 print("guardado", SALIDA)
