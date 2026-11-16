@@ -2,7 +2,7 @@
   "rnn": {
     "f1_macro": 0.14905461289107064,
     "accuracy": 0.17635203224722876,
-    "tiempo_s": 61.90794606400004,
+    "tiempo_s": 57.4306002379999,
     "epocas": 5,
     "mejor_epoca": 3,
     "parametros": 1331597,
@@ -37,7 +37,7 @@
       "fase": 4,
       "f1_macro": 0.14441,
       "accuracy": 0.29913,
-      "tiempo_s": 0.73419,
+      "tiempo_s": 0.68638,
       "parametros": 502268
     },
     {
@@ -45,7 +45,7 @@
       "fase": 4,
       "f1_macro": 0.19756,
       "accuracy": 0.26957,
-      "tiempo_s": 1.70457,
+      "tiempo_s": 1.70107,
       "parametros": 502268
     },
     {
@@ -53,7 +53,7 @@
       "fase": 5,
       "f1_macro": 0.14905,
       "accuracy": 0.17635,
-      "tiempo_s": 61.90795,
+      "tiempo_s": 57.4306,
       "parametros": 1331597
     }
   ],

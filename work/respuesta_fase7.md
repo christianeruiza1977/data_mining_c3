@@ -6,14 +6,14 @@ El `explain()` de una agregación por emoción muestra HashAggregate parcial, lu
 
 En AWS, los datos irían a S3 (`s3a://`, en lugar de HDFS con bloques de 128 MB y réplica 3). El trabajo correría con `spark-submit` en EMR (nodo maestro, nodos core y task spot, en lugar de YARN propio) y guardaría Parquet en S3. Con Spark Connect el notebook sería solo un cliente gRPC (`remote('sc://host:15002')`) y no habría RDD.
 
-Spark local fue más lento: ≈ 28.5 s de punta a punta contra 0.3 s del NB de sklearn. Con 2.6 MB de texto no se justifica un clúster. Un año a 10 mil tweets/día (1.8 GB) cabe en un nodo; a 1 millón/día (182.5 GB) ya no, y a 100 millones/día es obligatorio.
+Spark local fue más lento: 15.7 s de punta a punta contra 0.37 s del NB de sklearn (0.32 s de entrenamiento y 0.05 s de predicción). Con 2.6 MB de texto no se justifica un clúster. Un año a 10 mil tweets/día (1.8 GB) cabe en un nodo; a 1 millón/día (182.5 GB) ya no, y a 100 millones/día es obligatorio.
 
 | Medida | Valor |
 |---|---|
 | F1 macro Spark MLlib (prueba) | 0.142 |
 | Accuracy Spark MLlib (prueba) | 0.236 |
-| Entrenar sklearn NB / Pipeline Spark | 0.3 s / 3.1 s |
-| Spark de punta a punta (local) | ≈ 28.5 s |
+| Entrenar sklearn NB / Pipeline Spark | 0.32 s / 1.3 s |
+| Spark de punta a punta (local) | 15.7 s |
 | Shuffles (Exchange): agregación / SQL / ventana | 1 / 2 / 2 |
 | Un año a 10 mil / 1 millón / 100 millones al día | 1.8 / 182.5 / 18 250 GB |
 
